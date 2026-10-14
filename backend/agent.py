@@ -1,9 +1,8 @@
 
 from google.adk.agents import Agent
 
-# Import the custom Python function that checks outages.
-# This function is defined in tools.py.
-# Import all four tools available to our agent.
+# Import the custom Python function that checks outages and stuff
+# Import 4 tools VvvvV
 from tools import (
     check_network_outage,
     get_customer_info,
@@ -16,14 +15,13 @@ from tools import (
 root_agent = Agent(
     name="company_support_agent",
    
-   # Select the Gemini model that worked in Step 2.
+   # Select the Gemini model (Should I change if not working???)
     model="gemini-3.8-flash",
    
    
     description="An AI assistant for internet service support.",
     
-    # These instructions tell Gemini when and how to use
-    # the Python tools we provide.
+    # Instructions on how it should work
     instruction="""
     You are Company Support AI, an assistant for a
     fictional internet service provider.
@@ -74,8 +72,7 @@ root_agent = Agent(
     #Important!!!: Guides Gemini, but not a guaranteed security
     
 
-    # Register the available Python functions with Google ADK.
-    # Gemini chooses which functions to call when needed.
+    # Gemini chooses which functions to call when needed <-cool
     tools=[
         check_network_outage,
         get_customer_info,

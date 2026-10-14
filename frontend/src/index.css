@@ -1,17 +1,17 @@
 
-/* Apply consistent box sizing to all elements. */
+
 * {
   box-sizing: border-box;
 }
 
-/* Remove default margins and establish a base font. */
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #1f2937;
 }
 
-/* Let React occupy the full browser window. */
+
 html,
 body,
 #root {
@@ -19,8 +19,7 @@ body,
   height: 100%;
 }
 
-/* Prevent default page scrolling.
-   The chat message area handles its own scrolling. */
+
 body {
   overflow: hidden;
 }

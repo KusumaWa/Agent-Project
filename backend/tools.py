@@ -1,23 +1,14 @@
 
-# ============================================================
-# SPECTRUM SUPPORT AI - AGENT TOOLS
-# ============================================================
-# This file contains Python functions our AI agent can call.
-#
-# For now, we use fictional outage data.
-# In a real company, this information might come from
-# a database or internal network monitoring service.
-# ============================================================
+#This is fictional data that is currently being used
+#In IRL, this would be replaced for real user data
 
 
-# Import database functions used to save and retrieve tickets.
+# import database functions used to save and retrieve tickets.
 from database import (
     insert_support_ticket,
     fetch_support_ticket
 )
 
-# Simulated outage information.
-# Each city contains an outage status and a description.
 MOCK_OUTAGES = {
     "st. louis": {
         "outage": True,
@@ -48,22 +39,16 @@ def check_network_outage(city: str) -> dict:
         A dictionary describing the outage status.
     """
 
-    # Convert the city name to lowercase and remove
-    # leading/trailing spaces for easier matching.
     city = city.strip().lower()
 
-    # Look for the city in our simulated database.
     if city in MOCK_OUTAGES:
 
-        # Return the outage information for that city.
         return {
             "city": city,
             "status": "success",
             "data": MOCK_OUTAGES[city]
         }
 
-    # If the city isn't in our dataset, return a clear
-    # message instead of pretending no outage exists.
     return {
         "city": city,
         "status": "not_found",
@@ -71,18 +56,8 @@ def check_network_outage(city: str) -> dict:
     }
 
 
-# ============================================================
-# CUSTOMER ACCOUNT LOOKUP
-# ============================================================
-# These are fictional customer records used for testing.
-#
-# In a production application, we would store account data
-# in a database instead of directly inside our Python code.
-#
-# Each customer has a unique ID that acts as the dictionary key.
-# ============================================================
 
-
+###Fictional data vvvvvvvvvvvvvvvvvvv
 MOCK_CUSTOMERS = {
     "CUST001": {
         "name": "Alex Johnson",
@@ -122,27 +97,23 @@ def get_customer_info(customer_id: str) -> dict:
         an error message if the customer does not exist.
     """
 
-    # Print a debugging message whenever this tool executes.
-    # This will appear in our FastAPI terminal.
+
     print(f"[TOOL CALLED] get_customer_info({customer_id})")
 
-    # Remove extra spaces and convert the ID to uppercase.
-    # For example, " cust001 " becomes "CUST001".
+
     customer_id = customer_id.strip().upper()
 
-    # Search the dictionary for the requested customer.
+
     customer = MOCK_CUSTOMERS.get(customer_id)
 
-    # If the customer doesn't exist, return an error result.
-    # This avoids inventing customer information.
+
     if customer is None:
         return {
             "status": "not_found",
             "message": "Customer record not found in demo data."
         }
 
-    # Return the customer information if a match exists.
-    # The AI agent can use this result to answer the user.
+
     return {
         "status": "success",
         "customer_id": customer_id,
@@ -152,43 +123,26 @@ def get_customer_info(customer_id: str) -> dict:
 
 
 
-# ============================================================
-# SUPPORT TICKET SYSTEM
-# ============================================================
-# These functions allow our AI agent to create and retrieve
-# support tickets for fictional customers.
-#
-# For now, tickets are stored in Python memory.
-# They will disappear when the backend restarts.
-#
-# We'll replace this with SQLite in Step 6.
-# ============================================================
+
 
 from datetime import datetime, timezone
 from threading import Lock
 
 
-# Store tickets in a dictionary.
-# The key is the ticket ID, and the value is the ticket data.
+
 SUPPORT_TICKETS = {}
 
-# Count how many tickets have been created.
 ticket_counter = 0
 
-# Prevent multiple requests from updating the counter
-# at the same time within one server process.
+
 ticket_lock = Lock()
 
 
 
-# ============================================================
-# DATABASE-BACKED SUPPORT TICKET TOOLS
-# ============================================================
-# These functions are available to our Gemini AI agent.
-#
+
 # They validate information before calling database.py.
-# This separates business logic from database operations.
-# ============================================================
+# separates business logic from database operations.
+
 
 
 def create_support_ticket(
@@ -209,12 +163,12 @@ def create_support_ticket(
         or an error describing invalid input.
     """
 
-    # Normalize incoming values.
+    # Normalize 
     customer_id = customer_id.strip().upper()
     issue = issue.strip()
     priority = priority.strip().capitalize()
 
-    # Verify that the customer exists in our demo records.
+    # Verify 
     customer = MOCK_CUSTOMERS.get(customer_id)
 
     if customer is None:
@@ -223,22 +177,22 @@ def create_support_ticket(
             "message": "Customer does not exist."
         }
 
-    # Reject empty issue descriptions.
+    # Reject 
     if not issue:
         return {
             "status": "error",
             "message": "Issue description cannot be empty."
         }
 
-    # Validate priority before saving it to SQLite.
+    # Validate
     if priority not in ("Low", "Medium", "High"):
         return {
             "status": "error",
             "message": "Priority must be Low, Medium, or High."
         }
 
-    # Call our database function to create the ticket.
-    # SQLite generates the unique numeric identifier.
+    # Call database functioun to creat ticket
+  
     ticket = insert_support_ticket(
         customer_id=customer_id,
         customer_name=customer["name"],
@@ -246,10 +200,10 @@ def create_support_ticket(
         priority=priority
     )
 
-    # Log successful ticket creation in the terminal.
+  
     print(f"[DATABASE] Created support ticket {ticket['ticket_id']}")
 
-    # Return the ticket to Gemini through Google ADK.
+    # return the ticket to Gemini through Google ADK.
     return {
         "status": "success",
         "message": "Support ticket created successfully.",
@@ -269,17 +223,16 @@ def get_support_ticket(ticket_id: str) -> dict:
         The stored ticket or a not-found message.
     """
 
-    # Query our SQLite database for the requested ticket.
     ticket = fetch_support_ticket(ticket_id)
 
-    # If no ticket matches, return a clear result.
+    # if no ticket match
     if ticket is None:
         return {
             "status": "not_found",
             "message": "Support ticket not found."
         }
 
-    # Return the database record to our AI agent.
+    # return database to ai agent
     return {
         "status": "success",
         "ticket": ticket,
