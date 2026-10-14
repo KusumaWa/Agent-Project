@@ -1,0 +1,19 @@
+# Python dependencies and generated files
+.venv/
+__pycache__/
+*.pyc
+
+# Secret credentials
+.env
+
+# Local SQLite database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# JavaScript dependencies
+node_modules/
+
+# Vite production build output
+dist/

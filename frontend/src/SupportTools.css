@@ -1,0 +1,232 @@
+
+/* Main support tools page. */
+.support-tools {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 32px;
+  background: #f5f7fb;
+}
+
+/* Page heading. */
+.tools-header h1 {
+  margin: 0 0 8px;
+}
+
+.tools-header p {
+  color: #64748b;
+}
+
+/* Tool selection buttons. */
+.tools-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.tools-tabs button {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tools-tabs button.selected {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* Form containing the selected tool's inputs. */
+.tools-form,
+.tools-result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 850px;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+.tools-form h2,
+.tools-result h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Arrange labels above their input controls. */
+.tools-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+}
+
+/* Give all form inputs a consistent appearance. */
+.tools-form input,
+.tools-form textarea,
+.tools-form select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* Keep the confirmation checkbox beside its text. */
+.tools-form .tools-checkbox {
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.tools-checkbox input {
+  width: 17px;
+  height: 17px;
+}
+
+/* Primary form action. */
+.tools-submit {
+  align-self: flex-start;
+  padding: 12px 22px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tools-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Make long JSON results scroll instead of overflowing. */
+.tools-result pre {
+  padding: 16px;
+  margin: 0;
+  overflow-x: auto;
+  background: #f1f5f9;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* API errors. */
+.tools-error {
+  max-width: 850px;
+  padding: 14px;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 9px;
+}
+
+.tools-disclaimer {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Stack buttons on smaller screens. */
+@media (max-width: 700px) {
+  .support-tools {
+    padding: 18px;
+  }
+
+  .tools-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================
+   FORMATTED RESULT CARDS
+   ========================================================== */
+
+/* Place the result title and status badge side by side. */
+.result-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Remove extra spacing from the result title. */
+.result-heading h2 {
+  margin: 0;
+}
+
+/* Make the customer name or ticket ID stand out. */
+.tools-result h3 {
+  font-size: 22px;
+  margin: 4px 0 8px;
+  color: #0f172a;
+}
+
+/* Group the returned information together. */
+.result-details {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+/* Keep each field consistently spaced. */
+.result-details p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.result-details p:last-child {
+  margin-bottom: 0;
+}
+
+/* Make field names visually distinct. */
+.result-details strong {
+  color: #0f172a;
+}
+
+/* Shared styling for status badges. */
+.result-badge {
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Active accounts and healthy simulated networks. */
+.result-badge.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Simulated network outages. */
+.result-badge.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Support ticket status. */
+.result-badge.info {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Display additional information below result cards. */
+.result-note {
+  margin: 0;
+  padding: 12px 16px;
+  background: #eff6ff;
+  color: #475569;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
